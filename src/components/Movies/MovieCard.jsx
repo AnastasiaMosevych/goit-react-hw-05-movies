@@ -1,4 +1,5 @@
-import { getImage } from "api/moviesApi"
+import { getImage } from "api/moviesApi";
+import PropTypes from 'prop-types';
 
 export const MovieCard = ({ movieDetails }) => {
     const getGenre = genres => {
@@ -17,7 +18,6 @@ export const MovieCard = ({ movieDetails }) => {
             <h1>
                 {movieDetails.title} {getYear(movieDetails.release_date)}
             </h1>
-            <p>{movieDetails.tagline}</p>
             <div>
                 <p>Vote: {movieDetails.vote_average}</p>
                 <h3>Overview: </h3>
@@ -29,3 +29,21 @@ export const MovieCard = ({ movieDetails }) => {
             
     )
 }
+
+MovieCard.propTypes = {
+    movieDetails: PropTypes.shape({
+        genres: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                name: PropTypes.string.isRequired,
+            })
+        ),
+        id: PropTypes.number.isRequired,
+        overview: PropTypes.string,
+        poster_path: PropTypes.string,
+        release_date: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        vote_average: PropTypes.number.isRequired,
+    })
+}
+

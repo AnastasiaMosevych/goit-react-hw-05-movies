@@ -2,6 +2,7 @@ import { Container } from "components/App.styled";
 import { SearchForm, SubmitButton, SearchFormInput, Label } from "./SearchInput.styled";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 export const SearchInput = ({handleSearchInputSubmit}) => {
     const [searchText, setSearchText] = useState("");
@@ -34,8 +35,10 @@ export const SearchInput = ({handleSearchInputSubmit}) => {
                 </SearchFormInput>
                 <SubmitButton type="submit">Search</SubmitButton>
             </SearchForm>
-        </Container>
-        
-        
+        </Container>  
     )
+}
+
+SearchInput.propTypes = {
+    handleSearchInputSubmit: PropTypes.func.isRequired,
 }
