@@ -1,14 +1,15 @@
 import { Container } from "components/App.styled";
 import { SearchForm, SubmitButton, SearchFormInput, Label } from "./SearchInput.styled";
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+// import { searchMovies } from "api/moviesApi";
 
 export const SearchInput = ({handleSearchInputSubmit}) => {
-    const [searchText, setSearchText] = useState("");
     const [searchParams, setSearchParams] = useSearchParams({ movieId: ''});
     const movieId = searchParams.get('movieId') ?? '';
-    
+    const [searchText, setSearchText] = useState(movieId);
+ 
     const onSearchChange = e => {
         const movieIdValue = e.target.value
         if (movieIdValue === "") {
@@ -23,6 +24,11 @@ export const SearchInput = ({handleSearchInputSubmit}) => {
         e.preventDefault();
         handleSearchInputSubmit(searchText);
     }
+
+    useEffect(() => {
+        handleSearchInputSubmit(searchText);
+    }, [handleSearchInputSubmit, searchText])
+
     return (
         <Container>
             <SearchForm onSubmit={onSubmit}>

@@ -18,7 +18,6 @@ const MoviesPage = () => {
             searchMovies(searchText).then(response => {
                 setMovies(response);
             });
-
         }
     }, [searchText])
 
